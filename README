@@ -5,13 +5,32 @@ fricas-atp        ** under construction **
 Automated Theorem Prover for FriCAS (based on SNARK).
 
 
-
 -----------
 Quick start
 -----------
 
+1. Install QuickLisp (if not done yet ;)
+   - add the following lines to .axiom.input:
+   
+       )lisp (format nil "Loading QuickLisp ...")
+       )lisp (load "~/quicklisp/setup.lisp")
+       )lisp (defun |quickLoad| (p) (ql::quickload p))
+       )lisp (defun |quickFind| (p) (ql::apropos p))
+   
+   - if quicklisp is not in "~" then adjust accordingly.
+   
+2. cd quicklisp/local-projects
+3. git clone https://github.com/nilqed/fricas-atp.git
+4. start FriCAS
+5. -> quickLoad("fricas-atp")$Lisp
+   -> atp-init()$Lisp
+   
+a) Available commands: )show PROP
+b) Next time only 4&5 are necessary to load the prover.
+c) atp-init()$Lisp always resets the prover to the default state
+   (usually not necessary).
 
-
+   
 ------------
 Introduction
 ------------
@@ -26,6 +45,7 @@ core of NASA's Amphion system, which composes software from components to meet
 users' specifications, e.g., to perform computations in planetary astronomy. 
 SNARK has also been connected to Kestrel's SPECWARE environment for software 
 development.
+
 
 -------------
 Documentation
