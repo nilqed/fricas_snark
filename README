@@ -23,11 +23,11 @@ Quick start
 3. git clone https://github.com/nilqed/fricas-atp.git
 4. start FriCAS
 5. -> quickLoad("fricas-atp")$Lisp
-   -> atp-init()$Lisp
+   -> atp_init()$Lisp
    
 a) Available commands: )show PROP
 b) Next time only 4&5 are necessary to load the prover.
-c) atp-init()$Lisp always resets the prover to the default state
+c) atp_init()$Lisp always resets the prover to the default state
    (usually not necessary).
 
    
