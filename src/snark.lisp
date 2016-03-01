@@ -79,15 +79,15 @@
 ;;; asdf/quicklisp
 ;;;
 
-(defparameter *fricas-atp* (asdf:system-source-directory :fricas-atp))
+(defparameter *fricas-snark* (asdf:system-source-directory :fricas-snark))
 
 (defun compile-prop ()
-  (|doSystemCommand| (format nil "cd ~Asrc" *fricas-atp*))
+  (|doSystemCommand| (format nil "cd ~Asrc" *fricas-snark*))
   (|doSystemCommand| (format nil "compile prop.spad")))
 
 (defun load-prop ()
-  (if (probe-file (format nil "~Asrc/PROP.NRLIB/PROP.lsp" *fricas-atp*))
-    (|doSystemCommand| (format nil "lib ~Asrc/PROP" *fricas-atp*))
+  (if (probe-file (format nil "~Asrc/PROP.NRLIB/PROP.lsp" *fricas-snark*))
+    (|doSystemCommand| (format nil "lib ~Asrc/PROP" *fricas-snark*))
     (compile-prop)))
 
 (defun |snarkInit| ()
