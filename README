@@ -34,14 +34,14 @@ Remarks
 
 a) Available commands: )show PROP
 b) Next time only 4 & 5 are necessary to load the prover.
-c) snark_init()$Lisp always resets the prover to the default state
+c) snarkIinit()$Lisp always resets the prover to the default state
    (usually not necessary).
 d) Using macros in .axiom.input, e.g. 
       use    ==> quickLoad$Lisp
       lookup ==> quickFind$Lisp
       snark  ==> snarkInit$Lisp
    one can simply write: 
-      use "snark" ; atp()
+      use "fricas-snark" ; snark()
    to start and initialize the prover.
 
    
