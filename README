@@ -25,7 +25,7 @@ Quick start
 4. start FriCAS
 
 5. -> quickLoad("fricas-snark")$Lisp
-   -> snark_init()$Lisp
+   -> snarkInit()$Lisp
 
    
 -------   
@@ -39,7 +39,7 @@ c) snark_init()$Lisp always resets the prover to the default state
 d) Using macros in .axiom.input, e.g. 
       use    ==> quickLoad$Lisp
       lookup ==> quickFind$Lisp
-      atp    ==> snark_init$Lisp
+      snark  ==> snarkInit$Lisp
    one can simply write: 
       use "snark" ; atp()
    to start and initialize the prover.

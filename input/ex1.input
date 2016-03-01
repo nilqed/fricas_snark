@@ -81,7 +81,7 @@ ans:=pred('ANS,[%Z::X])
 prove?(carol_gp,H2,ans)
 
 -- reset to default (since we have overwritten default options !!)
-atp_init()$Lisp
+snarkInit()$Lisp
 
 
 

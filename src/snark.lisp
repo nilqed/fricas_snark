@@ -90,7 +90,7 @@
     (|doSystemCommand| (format nil "lib ~Asrc/PROP" *fricas-atp*))
     (compile-prop)))
 
-(defun |snark_init| ()
+(defun |snarkInit| ()
   (snark::initialize)
   (snark::default-run-time-limit 60)
   (snark::default-use-resolution)
