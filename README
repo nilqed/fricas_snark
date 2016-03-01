@@ -1,6 +1,6 @@
-==========
-fricas-atp        ** under construction **
-==========
+============
+fricas-snark        ** under construction **
+============
  
 Automated Theorem Prover for FriCAS (based on SNARK).
 
@@ -10,25 +10,39 @@ Quick start
 -----------
 
 1. Install QuickLisp (if not done yet ;)
-   - add the following lines to .axiom.input:
+   - add the following three lines to .axiom.input:
    
-       )lisp (format nil "Loading QuickLisp ...")
-       )lisp (load "~/quicklisp/setup.lisp")
+       )lisp (if (load "~/quicklisp/setup.lisp") '|QuickLisp|)
        )lisp (defun |quickLoad| (p) (ql::quickload p))
-       )lisp (defun |quickFind| (p) (ql::apropos p))
+       )lisp (defun |quickFind| (p) (ql::system-apropos p))
    
    - if quicklisp is not in "~" then adjust accordingly.
    
-2. cd quicklisp/local-projects
+2. cd ~/quicklisp/local-projects
+
 3. git clone https://github.com/nilqed/fricas-atp.git
+
 4. start FriCAS
-5. -> quickLoad("fricas-atp")$Lisp
-   -> atp_init()$Lisp
+
+5. -> quickLoad("fricas-snark")$Lisp
+   -> snark_init()$Lisp
+
    
+-------   
+Remarks   
+-------
+
 a) Available commands: )show PROP
-b) Next time only 4&5 are necessary to load the prover.
-c) atp_init()$Lisp always resets the prover to the default state
+b) Next time only 4 & 5 are necessary to load the prover.
+c) snark_init()$Lisp always resets the prover to the default state
    (usually not necessary).
+d) Using macros in .axiom.input, e.g. 
+      use    ==> quickLoad$Lisp
+      lookup ==> quickFind$Lisp
+      atp    ==> snark_init$Lisp
+   one can simply write: 
+      use "snark" ; atp()
+   to start and initialize the prover.
 
    
 ------------

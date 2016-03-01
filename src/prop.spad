@@ -102,7 +102,7 @@ Proposition(R) : Exports == Implementation where
       x \/ y == DISJUNCTION(x,y)$Lisp
       x >> y == IMPLICATION(x,y)$Lisp
       x ^  y == EQUIVALENCE(x,y)$Lisp
-      x << y == IMPLIEDBY(x,y)$Lisp
+      x << y == IMPLIED_BY(x,y)$Lisp
       ~ x    == NEGATION(x)$Lisp
 
 
