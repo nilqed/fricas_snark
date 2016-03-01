@@ -1,9 +1,9 @@
 (in-package :common-lisp-user)
 
-(asdf:defsystem #:fricas-atp
+(asdf:defsystem #:fricas-snark
   :serial t
   :description "FriCAS Automated Theorem Prover - based on SNARK"
-  :version "20160225r001"
+  :version "20160225r002"
   :author "Kurt Pagani, <nilqed@gmail.com>"
   :license "MPL 1.1, see file LICENSE"
   :depends-on (#:snark)
