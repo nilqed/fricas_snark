@@ -1,0 +1,115 @@
+-- ========================================================================
+-- Seventy-Five Problems for Testing Automatic Theorem Provers
+-- FRANCIS JEFFRY PELLETIER
+-- Journal of Automated Reasoning 2 (1986) 191-216
+-- http://www.sfu.ca/~jeffpell/papers/75ATPproblems86.pdf
+-- ========================================================================
+
+X==>EXPR INT
+P==>PROP INT
+
+pcheck(problem,i) ==
+  formula:P:=problem(1)
+  premises:List P:=problem(2) 
+  res:=prove(formula,premises)$P
+  if  (string symbol(res)="PROOF-FOUND") then
+    print (concat(string(i),":ok")::Symbol)
+    true
+  else
+    print (concat(string(i),":ERROR")::Symbol)
+    false
+  
+  
+p:=pred('p,[])
+q:=pred('q,[])
+r:=pred('r,[])
+s:=pred('s,[])
+
+f(x:X):P == pred('f,[x])
+g(x:X):P == pred('g,[x])
+h(x:X):P == pred('h,[x])
+k(x:X):P == pred('k,[x])
+
+pelletier:= [ _
+  [(p>>q)^(~q>>~p),[]], _
+  [~~p^p,[]], _
+  [~(p>>q)>>(q>>p),[]], _
+  [(~p>>q)^(~q>>p),[]], _
+  [((p\/q)>>(p\/r))>>(p\/(q>>r)),[]], _
+  [p\/~p,[]], _
+  [p\/~~~p,[]], _
+  [((p>>q)>>p)>>p,[]], _
+  [((p\/q)/\(~p\/q)/\(p\/~q))>>~(~p\/~q),[]], _
+  [p^q,[q>>r,r>>(p/\q),p>>(q\/r)]], _
+  [p^p,[]], _
+  [((p^q)^r)^(p^(q^r)),[]], _
+  [(p\/(q/\r))^((p\/q)/\(p\/r)),[]], _
+  [(p^q)^((q\/~p)/\(~q\/p)),[]], _
+  [(p>>q)^(~p\/q),[]], _
+  [(p>>q)\/(q>>p),[]], _
+  [((p/\(q>>r))>>s)^((~p\/q\/s)/\(~p\/~r\/s)),[]], _
+  [ex(y,all(x,f(y)>>f(x))),[]], _
+  [ex(x,all([y,z],((f(y)>>g(z))>>(f(x)>>g(x))))),[]], _
+  [all([x,y],ex(z,all(w,((f(x)/\g(y))>>(h(z)/\k(w))>>((ex([x,y],(f(x)/\g(y))>>ex(z,h(z))))))))),[]], _
+  [ex(x,p^f(x)),[ex(x,p>>f(x)),ex(x,f(x)>>p)]], _
+  [all(x,p^f(x))>>(p^all(x,f(x))),[]], _
+  [all(x,p\/f(x))>>(p\/all(x,f(x))),[]], _
+  [ex(x,f(x)/\h(x)),[~ex(x,k(x)/\g(x)),all(x,f(x)>>(g(x)\/h(x))),~ex(x,f(x)>>ex(x,g(x))),all(x,g(x)\/h(x)>>k(x))]] ]
+
+)if any
+  ["exists(x,q(x)&&p(x))",["exists(x,p(x))","forall(x,(f(x)=>(~g(x)&&r(x))))","forall(x,(p(x)=>(g(x)&&f(x))))","forall(x,(p(x)=>q(x))||exists(x,(p(x)&&r(x))))"]], _
+  --["forall(x,(p(x)=>r(x)))<=>forall(x,(q(x)=>s(x)))",["exists(x,p(x))<=>exists(x,q(x))","forall([x,y],(p(x)&&q(y))=>(r(x)<=>s(y)))"]], _
+  ["0+27",[]], _
+  ["0+28",[]], _
+  ["0+29",[]], _
+  ["0+30",[]], _
+  ["0+31",[]], _
+  ["0+32",[]], _
+  ["0+33",[]], _
+  --["(exists(x,forall(y,(p(x)<=>p(y))))<=>(exists(x,q(x))<=>forall(y,p(y))))<=>(exists(x,forall(y,(q(x)<=>q(y))))<=>(exists(x,p(x))<=>forall(y,p(y))))",[]], _
+  ["0+35",[]], _
+  ["0+36",[]], _
+  ["0+37",[]], _
+  ["0+38",[]], _
+  ["0+39",[]], _
+  ["0+40",[]], _
+  ["0+41",[]], _
+  ["0+42",[]], _
+  ["0+43",[]], _
+  ["0+44",[]], _
+  ["0+45",[]], _
+  ["0+46",[]], _
+  ["0+47",[]], _
+  ["0+48",[]], _
+  ["0+49",[]], _
+  ["0+50",[]], _
+  ["0+51",[]], _
+  ["0+52",[]], _
+  ["0+53",[]], _
+  ["0+54",[]], _
+  ["0+55",[]], _
+  ["0+56",[]], _
+  ["0+57",[]], _
+  ["0+58",[]], _
+  ["0+59",[]], _
+  ["0+60",[]], _
+  ["0+61",[]], _
+  ["0+62",[]], _
+  ["0+63",[]], _
+  ["0+64",[]], _
+  ["0+65",[]], _
+  ["0+66",[]], _
+  ["0+67",[]], _
+  ["0+68",[]], _
+  ["0+69",[]], _
+  ["0+70",[]], _
+  ["0+71",[]], _
+  ["0+72",[]], _
+  ["0+73",[]], _
+  ["0+74",[]], _
+  ["0+75",[]] _
+]
+
+)endif
+
+[pcheck(pelletier(i),i) for i in 1..#pelletier]
