@@ -5,6 +5,8 @@
 -- http://www.sfu.ca/~jeffpell/papers/75ATPproblems86.pdf
 -- ========================================================================
 
+)lisp (snark::default-run-time-limit 5) 
+
 X==>EXPR INT
 P==>PROP INT
 
@@ -18,8 +20,8 @@ pcheck(problem,i) ==
   else
     print (concat(string(i),":ERROR")::Symbol)
     false
-  
-  
+    
+ 
 p:=pred('p,[])
 q:=pred('q,[])
 r:=pred('r,[])
@@ -28,7 +30,17 @@ s:=pred('s,[])
 f(x:X):P == pred('f,[x])
 g(x:X):P == pred('g,[x])
 h(x:X):P == pred('h,[x])
+i(x:X):P == pred('i,[x])
+j(x:X):P == pred('j,[x])
 k(x:X):P == pred('k,[x])
+l(x:X):P == pred('l,[x])
+m(x:X):P == pred('m,[x])
+
+ff(x:X,y:X):P == pred('ff,[x,y])
+gg(x:X,y:X):P == pred('gg,[x,y])
+hh(x:X,y:X):P == pred('hh,[x,y])
+pp(x:X,y:X):P == pred('pp,[x,y])
+
 
 pelletier:= [ _
   [(p>>q)^(~q>>~p),[]], _
@@ -54,21 +66,22 @@ pelletier:= [ _
   [ex(x,p^f(x)),[ex(x,p>>f(x)),ex(x,f(x)>>p)]], _
   [all(x,p^f(x))>>(p^all(x,f(x))),[]], _
   [all(x,p\/f(x))>>(p\/all(x,f(x))),[]], _
-  [ex(x,f(x)/\h(x)),[~ex(x,k(x)/\g(x)),all(x,f(x)>>(g(x)\/h(x))),~ex(x,f(x)>>ex(x,g(x))),all(x,g(x)\/h(x)>>k(x))]] ]
-
+  [ex(x,f(x)/\h(x)),[~ex(x,k(x)/\g(x)),all(x,f(x)>>(g(x)\/h(x))),~ex(x,f(x)>>ex(x,g(x))),all(x,g(x)\/h(x)>>k(x))]], _
+  [ex(x,k(x)/\h(x)),[ex(x,h(x)),all(x,(f(x)>>(~g(x)/\l(x)))),all(x,(h(x)>>(g(x)/\f(x)))),all(x,(h(x)>>k(x))\/ex(x,(h(x)/\l(x))))]], _
+  [all(x,(f(x)>>l(x)))^all(x,(g(x)>>m(x))),[ex(x,f(x))^ex(x,g(x)),all([x,y],(f(x)/\g(y))>>(l(x)^m(y)))]], _
+  [all(x,j(x)>>~i(x)),[ex(x,f(x)/\~g(x)),all(x,f(x)>>h(x)),all(x,(j(x)/\i(x))>>f(x)),ex(x,(h(x)/\~g(x)))>>all(x,i(x)>>~h(x))]], _
+  [all(x,(h(x)/\f(x))>>g(x)),[all(x,h(x))>>all(x,i(x)),all(x,(i(x)\/j(x)))>>ex(x,i(x)/\k(x)),ex(x,k(x))>>all(x,f(x)>>g(x))]], _
+  [(all(x,(f(x)>>h(x)))/\all(x,(g(x)>>j(x))))^(all([x,y],(f(x)/\g(y))>>(h(x)/\j(y)))),[ex(x,f(x))/\ex(x,g(x))]], _
+  [all(x,i(x)),[all(x,(f(x)\/g(x))>>~h(x)),all(x,(g(x)>>~i(x))>>(f(x)/\h(x)))]], _
+  [ex(x,i(x)/\j(x)),[~(ex(x,f(x)/\(g(x)\/h(x)))),ex(x,i(x)/\f(x)),all(x,(~h(x)>>j(x)))]], _
+  [all(x,(f(x)/\k(x))>>j(x)),[all(x,(f(x)/\(g(x)\/h(x)))>>i(x)),all(x,(i(x)/\h(x))>>j(x)),all(x,k(x)>>h(x))]], _
+  [all(x,f(a)/\(f(x)>>f(b))>>f(c))^(all(x,(~f(a)\/(f(x)\/f(c))))/\(~f(a)\/(~f(b)\/f(c)))),[]], _
+  [(ex(x,all(y,(f(x)^f(y))))^(ex(x,g(x))^all(y,f(y))))^(ex(x,all(y,(g(x)^g(y))))^(ex(x,f(x))^all(y,f(y)))),[]], _
+  [ex([x,y] ,pp(x,y)>>all([x,y] ,pp(x,y))),[]], _
+  [all(x,ex(y,hh(x,y))),[all(x,ex(y,ff(x,y))),all(x,ex(y,gg(x,y))),all([x,y],(ff(x,y)\/gg(x,y))>>all(z,(ff(y,z)\/gg(y,z)>>hh(x,z))))]]
+  ]
+  
 )if any
-  ["exists(x,q(x)&&p(x))",["exists(x,p(x))","forall(x,(f(x)=>(~g(x)&&r(x))))","forall(x,(p(x)=>(g(x)&&f(x))))","forall(x,(p(x)=>q(x))||exists(x,(p(x)&&r(x))))"]], _
-  --["forall(x,(p(x)=>r(x)))<=>forall(x,(q(x)=>s(x)))",["exists(x,p(x))<=>exists(x,q(x))","forall([x,y],(p(x)&&q(y))=>(r(x)<=>s(y)))"]], _
-  ["0+27",[]], _
-  ["0+28",[]], _
-  ["0+29",[]], _
-  ["0+30",[]], _
-  ["0+31",[]], _
-  ["0+32",[]], _
-  ["0+33",[]], _
-  --["(exists(x,forall(y,(p(x)<=>p(y))))<=>(exists(x,q(x))<=>forall(y,p(y))))<=>(exists(x,forall(y,(q(x)<=>q(y))))<=>(exists(x,p(x))<=>forall(y,p(y))))",[]], _
-  ["0+35",[]], _
-  ["0+36",[]], _
   ["0+37",[]], _
   ["0+38",[]], _
   ["0+39",[]], _
@@ -111,5 +124,6 @@ pelletier:= [ _
 ]
 
 )endif
+
 
 [pcheck(pelletier(i),i) for i in 1..#pelletier]
