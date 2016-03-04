@@ -40,6 +40,8 @@ ff(x:X,y:X):P == pred('ff,[x,y])
 gg(x:X,y:X):P == pred('gg,[x,y])
 hh(x:X,y:X):P == pred('hh,[x,y])
 pp(x:X,y:X):P == pred('pp,[x,y])
+qq(x:X,y:X):P == pred('qq,[x,y])
+rr(x:X,y:X):P == pred('rr,[x,y])
 
 
 pelletier:= [ _
@@ -78,17 +80,17 @@ pelletier:= [ _
   [all(x,f(a)/\(f(x)>>f(b))>>f(c))^(all(x,(~f(a)\/(f(x)\/f(c))))/\(~f(a)\/(~f(b)\/f(c)))),[]], _
   [(ex(x,all(y,(f(x)^f(y))))^(ex(x,g(x))^all(y,f(y))))^(ex(x,all(y,(g(x)^g(y))))^(ex(x,f(x))^all(y,f(y)))),[]], _
   [ex([x,y] ,pp(x,y)>>all([x,y] ,pp(x,y))),[]], _
-  [all(x,ex(y,hh(x,y))),[all(x,ex(y,ff(x,y))),all(x,ex(y,gg(x,y))),all([x,y],(ff(x,y)\/gg(x,y))>>all(z,(ff(y,z)\/gg(y,z)>>hh(x,z))))]]
+  [all(x,ex(y,hh(x,y))),[all(x,ex(y,ff(x,y))),all(x,ex(y,gg(x,y))),all([x,y],(ff(x,y)\/gg(x,y))>>all(z,(ff(y,z)\/gg(y,z)>>hh(x,z))))]], _
+  [all(x,ex(y,rr(x,y))),[all(z,ex(w,all(x,ex(y,(pp(x,z)>>pp(y,w))/\pp(y,z)/\(pp(y,w)>>ex(u,qq(u,w))))))),all([x,z],(~pp(x,z)>>ex(y,qq(y,z)))),ex([x,y],qq(x,y))>>all(x,rr(x,x))]], _
+  [all(x,(f(a)/\(f(x)>>ex(y,f(y)/\rr(x,y))))>> ex([z,w],f(z)/\rr(x,w)/\rr(w,z)))^all(x,~f(a)\/f(x)\/ex([z,w],f(z)/\rr(x,w)/\rr(w,z))/\(~f(a)\/~ex(y,f(y)/\rr(x,y))\/ex([z,w],f(z)/\rr(x,w)/\rr(w,z)))),[]], _
+  [~ex(x,all(y,ff(y,x)^~ff(y,y))),[]], _
+  [ex(y,all(x,(ff(x,y)^ff(x,x))))>>~all(x,ex(y,all(z,ff(x,y)^~ff(z,x)))),[]], _
+  [~ex(z,all(x,ff(x,z))),[all(z,ex(y,all(x,ff(x,y)^(ff(x,z)/\~ff(x,x)))))]], _
+  [~ex(y,all(x,ff(x,y)^(~ex(z,ff(x,z)/\ff(z,x))))),[]], _
+  [all([x,y],qq(x,y)^qq(y,x)),[all([x,y],qq(x,y)^all(z,ff(z,x)^ff(z,y)))]]
   ]
   
 )if any
-  ["0+37",[]], _
-  ["0+38",[]], _
-  ["0+39",[]], _
-  ["0+40",[]], _
-  ["0+41",[]], _
-  ["0+42",[]], _
-  ["0+43",[]], _
   ["0+44",[]], _
   ["0+45",[]], _
   ["0+46",[]], _
