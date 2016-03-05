@@ -4,6 +4,10 @@
 -- Journal of Automated Reasoning 2 (1986) 191-216
 -- http://www.sfu.ca/~jeffpell/papers/75ATPproblems86.pdf
 -- ========================================================================
+snark ==> quickLoad("fricas-snark")$Lisp
+init  ==> snarkInit()$Lisp
+
+snark;init
 
 )lisp (snark::default-run-time-limit 5) 
 
@@ -39,9 +43,14 @@ m(x:X):P == pred('m,[x])
 ff(x:X,y:X):P == pred('ff,[x,y])
 gg(x:X,y:X):P == pred('gg,[x,y])
 hh(x:X,y:X):P == pred('hh,[x,y])
+jj(x:X,y:X):P == pred('jj,[x,y])
+kk(x:X,y:X):P == pred('kk,[x,y])
 pp(x:X,y:X):P == pred('pp,[x,y])
 qq(x:X,y:X):P == pred('qq,[x,y])
 rr(x:X,y:X):P == pred('rr,[x,y])
+
+
+phi:BOP:=operator 'phi
 
 
 pelletier:= [ _
@@ -87,23 +96,24 @@ pelletier:= [ _
   [ex(y,all(x,(ff(x,y)^ff(x,x))))>>~all(x,ex(y,all(z,ff(x,y)^~ff(z,x)))),[]], _
   [~ex(z,all(x,ff(x,z))),[all(z,ex(y,all(x,ff(x,y)^(ff(x,z)/\~ff(x,x)))))]], _
   [~ex(y,all(x,ff(x,y)^(~ex(z,ff(x,z)/\ff(z,x))))),[]], _
-  [all([x,y],qq(x,y)^qq(y,x)),[all([x,y],qq(x,y)^all(z,ff(z,x)^ff(z,y)))]]
+  [all([x,y],qq(x,y)^qq(y,x)),[all([x,y],qq(x,y)^all(z,ff(z,x)^ff(z,y)))]], _
+  [ex(x,j(x)/\~f(x)),[all(x,f(x)>>ex(y,g(y)/\hh(x,y))/\ex(y,g(y)/\~hh(x,y))),ex(x,(j(x)/\all(y,g(y)>>hh(x,y))))]], _
+  [ex(x,f(x)/\~ex(y,g(y)/\hh(x,y))),[all(x,f(x)/\all(y,(g(y)/\hh(x,y))>>jj(x,y))>>all(y,g(y)/\hh(x,y)>>k(y))),~ex(y,l(y)/\k(y)),ex(x,f(x)/\all(y,(hh(x,y)>>l(y)))/\all(y,(g(y)/\hh(x,y)>>jj(x,y))))]], _
+  [all(x,f(x)>>g(x)),[all(x,(f(x)/\all(y,(f(y)/\hh(x,y))>>g(y))>>g(x))),ex(x,f(x)/\~g(x))>>ex(x,(f(x)/\~g(x)/\all(y,(f(y)/\~g(y))>>jj(x,y)))),all([x,y],f(x)/\f(y)/\hh(x,y)>>~jj(x,y))]], _
+  [true()$P,[]], _
+  [all([a,b,c,d],(a=d+b)$P/\(c=d+b)$P),[all([a,b,c,d],(a=b+c)$P/\(d=b+c)$P),all([a,b,c,d],(a=c+b)$P/\(d=c+b)$P)]], _
+  [all(x,f(x)),[ex([x,y],all(z,(z=x+z)$P/\(y=x+z)$P)),f(a)/\f(b),~((a::X=b)$P)]], _
+  [all(x,ff(a,x)\/all(y,ff(y,x)))>>ex(x,all(y,ff(x,y))),[]], _
+  [ex(z,all(x,(ex(w,all(y,(ff(x,y)^(y=w)$P))^(x=z)$P)))),[ex([z,w],all([x,y],ff(x,y)^((x=z)$P/\(y=w)$P)))]], _
+  [ex(w,all(y,(ex(z,all(x,(ff(x,y)^(x=z)$P)))^(y=w)$P))),[ex([z,w],all([x,y],ff(x,y)^((x=z)$P/\(y=w)$P)))]], _
+  [ex(z,all(x,(ex(w,all(y,ff(x,y)^(y=w)$P))^(x=z)$P)))^ex(w,all(y,(ex(z,all(x,(ff(x,y)^(x=z)$P)))^(y=w)$P))),[ex([x,y],~((x=y)$P)/\all(z,(z=x+z)$P/\(y=z)$P))]], _
+  [~ex(w,all(x,ff(x,w)^all(u,ff(x,u)>>ex(y,ff(y,u)/\~ex(z,ff(x,u)/\ff(z,y)))))),[all(y,ex(z,all(x,ff(x,z)^(x=y)$P)))]], _
+  [kk(a,a),[ex(x,l(x)/\kk(x,a)),l(a)/\l(b)/\l(c),all(x,l(x)>>((x=a+x)$P/\(x=b+x)$P/\(x=c)$P)),all([y,x],kk(x,y)>>hh(x,y)),all([x,y],kk(x,y)>>~rr(x,y)),all(x,hh(a,x)>>~hh(c,x)),all(x,~((x=b)$P)>>hh(a,x)),all(x,~rr(x,a)>>hh(b,x)),all(x,hh(a,x)>>hh(b,z)),all(x,ex(y,~hh(x,y))),~((a=b)$P)]], _
+  [all(x,ex(y,f(y)/\(x=phi(y))$P)>>f(x))^all(x,f(x)>>f(phi(x))),[]]
   ]
   
+  
 )if any
-  ["0+44",[]], _
-  ["0+45",[]], _
-  ["0+46",[]], _
-  ["0+47",[]], _
-  ["0+48",[]], _
-  ["0+49",[]], _
-  ["0+50",[]], _
-  ["0+51",[]], _
-  ["0+52",[]], _
-  ["0+53",[]], _
-  ["0+54",[]], _
-  ["0+55",[]], _
-  ["0+56",[]], _
   ["0+57",[]], _
   ["0+58",[]], _
   ["0+59",[]], _
