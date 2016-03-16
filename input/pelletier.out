@@ -1,3 +1,9 @@
+
+*** DEPRECATED ***
+
+up to P 38 all --> true (after appl JP's Errata)
+
+
 kfp@helix:~/quicklisp/local-projects/fricas-snark/input$ rlwrap fricas -nox
 viewman not present, disabling graphics
 Checking for foreign routines
