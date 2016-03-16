@@ -4,12 +4,17 @@
 -- Journal of Automated Reasoning 2 (1986) 191-216
 -- http://www.sfu.ca/~jeffpell/papers/75ATPproblems86.pdf
 -- ========================================================================
+
+)clear completely
+)set message time on
+
 snark ==> quickLoad("fricas-snark")$Lisp
 init  ==> snarkInit()$Lisp
 
 snark;init
 
-)lisp (snark::default-run-time-limit 5) 
+)lisp (snark::default-run-time-limit 1) 
+
 
 X==>EXPR INT
 P==>PROP INT
@@ -51,6 +56,29 @@ rr(x:X,y:X):P == pred('rr,[x,y])
 
 
 phi:BOP:=operator 'phi
+op:BOP:=operator 'op
+f1:BOP:=operator 'f1
+f2:BOP:=operator 'f2
+g1:BOP:=operator 'g1
+g2:BOP:=operator 'g2
+
+
+-- group th problems
+grp_a:=all([x,y,z],(op(op(x,y),z)=op(x,op(y,z)))$P)
+grp_b:=all(x,(op(a,x)=x)$P)
+grp_c:=all(x,ex(y,(op(y,x)=a)$P))
+grp:=[grp_a,grp_b,grp_c]
+
+-- Charles Morgan
+T(x:X):P == pred('T,[x])
+ii:BOP:=operator 'ii
+n:BOP:=operator 'n
+
+cm_a:=all([x,y],T(ii(x,ii(y,x))))
+cm_b:=all([x,y,z],T(ii(ii(x,ii(y,z)),ii(ii(x,y),ii(x,z)))))
+cm_c:=all([x,y],T(ii(ii(n(x),n(y)),ii(y,x))))
+cm_d:=all([x,y],T(ii(x,y))/\(T(x)>>T(y)))
+cm:=[cm_a,cm_b,cm_c,cm_d]
 
 
 pelletier:= [ _
@@ -109,23 +137,23 @@ pelletier:= [ _
   [ex(z,all(x,(ex(w,all(y,ff(x,y)^(y=w)$P))^(x=z)$P)))^ex(w,all(y,(ex(z,all(x,(ff(x,y)^(x=z)$P)))^(y=w)$P))),[ex([x,y],~((x=y)$P)/\all(z,(z=x+z)$P/\(y=z)$P))]], _
   [~ex(w,all(x,ff(x,w)^all(u,ff(x,u)>>ex(y,ff(y,u)/\~ex(z,ff(x,u)/\ff(z,y)))))),[all(y,ex(z,all(x,ff(x,z)^(x=y)$P)))]], _
   [kk(a,a),[ex(x,l(x)/\kk(x,a)),l(a)/\l(b)/\l(c),all(x,l(x)>>((x=a+x)$P/\(x=b+x)$P/\(x=c)$P)),all([y,x],kk(x,y)>>hh(x,y)),all([x,y],kk(x,y)>>~rr(x,y)),all(x,hh(a,x)>>~hh(c,x)),all(x,~((x=b)$P)>>hh(a,x)),all(x,~rr(x,a)>>hh(b,x)),all(x,hh(a,x)>>hh(b,z)),all(x,ex(y,~hh(x,y))),~((a=b)$P)]], _
-  [all(x,ex(y,f(y)/\(x=phi(y))$P)>>f(x))^all(x,f(x)>>f(phi(x))),[]]
+  [all(x,ex(y,f(y)/\(x=phi(y))$P)>>f(x))^all(x,f(x)>>f(phi(x))),[]], _
+  [ff(f2(a,b),f2(a,c)),[ff(f2(a,b),f2(b,c)),ff(f2(b,c),f2(a,c)),all([x,y,z],(ff(x,y)/\ff(y,z))>>ff(x,z))]], _
+  [all([x,y],(f1(f1(x))=f1(g1(y)))$P),[all([x,y],(f1(x)=g1(y))$P)]], _
+  [ex(x,f(x)/\~f(f1(x))),[all(x,f(x)^~f(f1(x)))]], _
+  [all(x,ff(x,f1(x))^(ex(y,(all(z,ff(z,y)>>ff(z,f1(x)))/\ff(x,y))))),[]], _
+  [all([x,y,z,w],(f2(x,f2(y,f2(z,w)))=f2(f2(f2(x,y),z),w))$P),[all([x,y,z],(f2(x,f2(y,z))=f2(f2(x,y),z))$P)]], _
+  [(f(a)/\all(x,f(x)>>f(f1(x))))^all(x,(~f(a)\/f(x)\/f(f1(f1(x))))/\(~f(a)\/~f(f1(x))\/f(f1(f1(x))))),[]], _
+  [all([x,y,z],(op(x,y)=op(z,y))$P>>(x=z)$P),grp], _
+  [all([x,y],(op(y,x)=a)$P>>(op(x,y)=a)$P),grp], _
+  [all(x,(op(x,x)=a)$P)>>all([x,y],(op(x,y)=op(y,x))$P),[grp_a,grp_b]], _
+  [all(x,T(ii(x,n(n(x))))),cm], _
+  [all(x,T(ii(n(n(x)),x))),cm], _
+  [all(x,T(ii(x,n(n(x))))),[cm_a,cm_b,cm_d,all([x,y],T(ii(ii(y,x),ii(n(x),n(y)))))]]
   ]
   
   
 )if any
-  ["0+57",[]], _
-  ["0+58",[]], _
-  ["0+59",[]], _
-  ["0+60",[]], _
-  ["0+61",[]], _
-  ["0+62",[]], _
-  ["0+63",[]], _
-  ["0+64",[]], _
-  ["0+65",[]], _
-  ["0+66",[]], _
-  ["0+67",[]], _
-  ["0+68",[]], _
   ["0+69",[]], _
   ["0+70",[]], _
   ["0+71",[]], _
