@@ -1,5 +1,5 @@
 ============
-fricas-snark        ** under construction **
+fricas-snark        ** SNARK now is in Quicklisp projects **
 ============
  
 Automated Theorem Prover for FriCAS (based on SNARK).
@@ -10,7 +10,7 @@ Quick start
 -----------
 
 1. Install QuickLisp (if not done yet ;)
-   - add the following three lines to .axiom.input:
+   - add the following three lines to ~/.fricas.input:
    
        )lisp (if (load "~/quicklisp/setup.lisp") '|QuickLisp|)
        )lisp (defun |quickLoad| (p) (ql::quickload p))
@@ -22,10 +22,30 @@ Quick start
 
 3. git clone https://github.com/nilqed/fricas-snark.git
 
-4. start FriCAS
+4. start FriCAS  (e.g. fricas -nosman)
 
 5. -> quickLoad("fricas-snark")$Lisp
    -> snarkInit()$Lisp
+   -> )quit
+   
+6. run test
+   -> fricas -nosman
+   ->  )read "input/pelletier"
+   
+   Expected:
+   -- All tests passed?
+   reduce(_and,results)
+   
+   (46)  true
+                                                                Type: Boolean
+
+
+**
+If you add the following two macros to ~/.fricas.input 
+  snark ==> quickLoad("fricas-snark")$Lisp
+  init  ==> snarkInit()$Lisp
+then you can simply use the prover in FriCAS by the sequence
+  snark;init
 
    
 -------   
