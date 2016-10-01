@@ -79,15 +79,15 @@
 ;;; asdf/quicklisp
 ;;;
 
-(defparameter *fricas-snark* (asdf:system-source-directory :fricas-snark))
+(defparameter *fricas_snark* (asdf:system-source-directory :fricas_snark))
 
 (defun compile-prop ()
-  (|doSystemCommand| (format nil "cd ~Asrc" *fricas-snark*))
-  (|doSystemCommand| (format nil "compile prop.spad")))
+  (|doSystemCommand| (format nil "cd ~Alib" *fricas_snark*))
+  (|doSystemCommand| (format nil "compile ../src/prop.spad")))
 
 (defun load-prop ()
-  (if (probe-file (format nil "~Asrc/PROP.NRLIB/PROP.lsp" *fricas-snark*))
-    (|doSystemCommand| (format nil "lib ~Asrc/PROP" *fricas-snark*))
+  (if (probe-file (format nil "~Alib/PROP.NRLIB/PROP.lsp" *fricas_snark*))
+    (|doSystemCommand| (format nil "lib ~Alib/PROP" *fricas_snark*))
     (compile-prop)))
 
 (defun |snarkInit| ()
@@ -105,3 +105,15 @@
   (snark::default-print-options-when-starting nil)
   (snark::default-print-assertion-analysis-notes nil)
   (load-prop))
+
+
+(defun |testPROP| () 
+  (if (probe-file (format nil "~Atest/test_prop.input" *fricas_snark*))
+     (|doSystemCommand| (format nil "read ~Atest/test_prop )quiet" *fricas_snark*))
+     (print "Test file not found ...")))
+
+;;;
+;;; Initialize
+;;;
+(catch 'spad_reader (|snarkInit|))
+ 
