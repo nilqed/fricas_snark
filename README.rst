@@ -43,17 +43,20 @@ We assume Quicklisp_ is installed.
      systemCommand(concat ["lisp (ql::quickload _"",string p,"_")"])
    )set mess type on  
 
-whilst assuming your Quicklisp home is ``~/quicklisp``. Otherwise adjust 
+whereby assuming your Quicklisp home is ``~/quicklisp``. Otherwise adjust 
 the path in the function defined above.
 
-2. Clone https://github.com/nilqed/fricas_snark.git  to ``~/quicklisp/local-projects``
-
-3. Start *FriCAS* and issue: 
-
-::
-    
-    quickLoad fricas_snark
+2. Clone https://github.com/nilqed/fricas_snark.git  to ``~/quicklisp/local-projects``,
+   that is::
    
+      cd ~/quicklisp/local-projects
+      git clone https://github.com/nilqed/fricas_snark.git 
+   
+3. Start *FriCAS* and issue:::
+   
+    quickLoad fricas_snark
+
+    
 **NOTE** 
   If you start fricas without the ``-nosman`` option then you have to use ::
     
