@@ -57,13 +57,23 @@ the path in the function defined above.
     quickLoad fricas_snark
 
     
-**NOTE** 
+**NOTE**
+ 
   If you start fricas without the ``-nosman`` option then you have to use ::
     
     )frame next 
     
   in order to see the function ``quickLoad`` (This is because ``.fricas.input``
-  is read into frame ``initial`` (use ``)frame names`` to see frame names).
+  is read into frame ``initial`` - use )frame names to see a list of all 
+  frames. 
+  If you do not like to use a startup file then you can use the lisp commands 
+  of course:
+
+::
+
+    )lisp (load "~/quicklisp/setup")
+    )lisp (ql:quickload :dform)
+
 
 
 .. _QuickLisp: https://www.quicklisp.org/beta/
